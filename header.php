@@ -9,7 +9,7 @@ if(!isset($_SESSION['user'])){
 <header class="dashboard-navbar">
     <div class="navbar-container">
         <div class="logo">
-            <a href="dashboard.php">My Ecommerce</a>
+            <a href="dashboard.php">Organic Store</a>
         </div>
         <nav class="nav-links">
             <a href="products.php">Products</a>
