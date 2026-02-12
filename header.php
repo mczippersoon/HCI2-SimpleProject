@@ -8,6 +8,12 @@ if(!isset($_SESSION['user'])){
 
 <header class="dashboard-navbar">
     <div class="navbar-container">
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <label for="menu-toggle" class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
         <div class="logo">
             <a href="dashboard.php">Organic Store</a>
         </div>
