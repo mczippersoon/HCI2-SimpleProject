@@ -3,25 +3,6 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'], $_POST['product_id'])) {
-    $id = (int)($_POST['product_id'] ?? 0);
-    if (isset($_SESSION['cart'][$id])) {
-        $action = $_POST['action'];
-        if ($action === 'increment') {
-            $_SESSION['cart'][$id]['quantity'] += 1;
-        } elseif ($action === 'decrement') {
-            $newQty = $_SESSION['cart'][$id]['quantity'] - 1;
-            if ($newQty < 1) {
-                unset($_SESSION['cart'][$id]);
-            } else {
-                $_SESSION['cart'][$id]['quantity'] = $newQty;
-            }
-        }
-    }
-    header('Location: checkout.php');
-    exit();
-}
-
 $cartItems = $_SESSION['cart'] ?? [];
 $cartHasItems = !empty($cartItems);
 $cartTotal = 0;
@@ -58,22 +39,7 @@ include 'header.php';
                         <img src="<?php echo htmlspecialchars($item['image']); ?>" alt="<?php echo htmlspecialchars($item['name']); ?>">
                         <div class="cart-item-info">
                             <h3><?php echo htmlspecialchars($item['name']); ?></h3>
-                            <div class="cart-line">
-                                <p class="cart-price">₱<?php echo number_format($item['price'], 2); ?></p>
-                                <div class="qty-control">
-                                    <form method="post" action="checkout.php" class="qty-form">
-                                        <input type="hidden" name="product_id" value="<?php echo (int)$item['id']; ?>">
-                                        <input type="hidden" name="action" value="decrement">
-                                        <button type="submit" class="qty-btn" aria-label="Decrease quantity">-</button>
-                                    </form>
-                                    <span class="qty-value" aria-live="polite"><?php echo (int)$item['quantity']; ?></span>
-                                    <form method="post" action="checkout.php" class="qty-form">
-                                        <input type="hidden" name="product_id" value="<?php echo (int)$item['id']; ?>">
-                                        <input type="hidden" name="action" value="increment">
-                                        <button type="submit" class="qty-btn" aria-label="Increase quantity">+</button>
-                                    </form>
-                                </div>
-                            </div>
+                            <p class="cart-price">₱<?php echo number_format($item['price'], 2); ?> × <?php echo (int)$item['quantity']; ?></p>
                             <p class="cart-subtotal">Subtotal: ₱<?php echo number_format($lineTotal, 2); ?></p>
                         </div>
                     </div>

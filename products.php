@@ -86,7 +86,7 @@ include 'header.php';
 
         <!-- Product 3 -->
         <div class="product-card" data-category="vegetables" data-price="150" data-name="Fresh Cucumber">
-            <img src="images/cucumber.jpg" alt="Fresh Cucumber">
+            <img src="images/freshcucumber.jpg" alt="Fresh Cucumber">
             <h3>Fresh Cucumber</h3>
             <p class="price">₱150.00</p>
             <p class="description">Crisp and refreshing organic cucumbers</p>
@@ -94,7 +94,7 @@ include 'header.php';
                 <input type="hidden" name="product_id" value="3">
                 <input type="hidden" name="product_name" value="Fresh Cucumber">
                 <input type="hidden" name="product_price" value="150">
-                <input type="hidden" name="product_image" value="images/cucumber.jpg">
+                <input type="hidden" name="product_image" value="images/freshcucumber.jpg">
                 <input type="hidden" name="quantity" value="1">
                 <button type="submit" class="btn-cart">Add to Cart</button>
             </form>
@@ -118,7 +118,7 @@ include 'header.php';
 
         <!-- Product 5 -->
         <div class="product-card" data-category="snacks" data-price="320" data-name="Dried Mango">
-            <img src="images/driedmango.jpg" alt="Dried Mango">
+            <img src="images/driedmango.webp" alt="Dried Mango">
             <h3>Dried Mango</h3>
             <p class="price">₱320.00</p>
             <p class="description">Sweet and chewy organic dried mango slices</p>
@@ -126,7 +126,7 @@ include 'header.php';
                 <input type="hidden" name="product_id" value="5">
                 <input type="hidden" name="product_name" value="Dried Mango">
                 <input type="hidden" name="product_price" value="320">
-                <input type="hidden" name="product_image" value="images/driedmango.jpg">
+                <input type="hidden" name="product_image" value="images/driedmango.webp">
                 <input type="hidden" name="quantity" value="1">
                 <button type="submit" class="btn-cart">Add to Cart</button>
             </form>
@@ -143,6 +143,54 @@ include 'header.php';
                 <input type="hidden" name="product_name" value="Guava Jam">
                 <input type="hidden" name="product_price" value="280">
                 <input type="hidden" name="product_image" value="images/guava jam.jpg">
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit" class="btn-cart">Add to Cart</button>
+            </form>
+        </div>
+
+        <!-- Product 7 -->
+        <div class="product-card" data-category="snacks" data-price="250" data-name="Kamote Chips">
+            <img src="images/kamotechips.webp" alt="Kamote Chips">
+            <h3>Kamote Chips</h3>
+            <p class="price">₱250.00</p>
+            <p class="description">Crispy baked sweet potato chips lightly salted</p>
+            <form method="post" action="cart.php">
+                <input type="hidden" name="product_id" value="7">
+                <input type="hidden" name="product_name" value="Kamote Chips">
+                <input type="hidden" name="product_price" value="250">
+                <input type="hidden" name="product_image" value="images/kamotechips.webp">
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit" class="btn-cart">Add to Cart</button>
+            </form>
+        </div>
+
+        <!-- Product 8 -->
+        <div class="product-card" data-category="fruits" data-price="300" data-name="Fresh Mangoes">
+            <img src="images/mango.avif" alt="Fresh Mangoes">
+            <h3>Fresh Mangoes</h3>
+            <p class="price">₱300.00</p>
+            <p class="description">Sweet ripe mangoes harvested at peak flavor</p>
+            <form method="post" action="cart.php">
+                <input type="hidden" name="product_id" value="8">
+                <input type="hidden" name="product_name" value="Fresh Mangoes">
+                <input type="hidden" name="product_price" value="300">
+                <input type="hidden" name="product_image" value="images/mango.avif">
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit" class="btn-cart">Add to Cart</button>
+            </form>
+        </div>
+
+        <!-- Product 9 -->
+        <div class="product-card" data-category="spreads" data-price="320" data-name="Strawberry Jam">
+            <img src="images/strawberryjam.jpg" alt="Strawberry Jam">
+            <h3>Strawberry Jam</h3>
+            <p class="price">₱320.00</p>
+            <p class="description">Small-batch strawberry jam made with ripe berries</p>
+            <form method="post" action="cart.php">
+                <input type="hidden" name="product_id" value="9">
+                <input type="hidden" name="product_name" value="Strawberry Jam">
+                <input type="hidden" name="product_price" value="320">
+                <input type="hidden" name="product_image" value="images/strawberryjam.jpg">
                 <input type="hidden" name="quantity" value="1">
                 <button type="submit" class="btn-cart">Add to Cart</button>
             </form>
