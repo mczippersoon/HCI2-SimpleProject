@@ -105,16 +105,45 @@ include 'header.php';
             </div>
 
             <aside class="cart-summary">
-                <h2>Order Summary</h2>
-                <div class="cart-summary-row">
-                    <span>Items</span>
-                    <span>₱<?php echo number_format($cartTotal, 2); ?></span>
-                </div>
-                <div class="cart-summary-row total">
-                    <span>Total</span>
-                    <span>₱<?php echo number_format($cartTotal, 2); ?></span>
-                </div>
-                <a class="btn-checkout" href="checkout.php">Go to Checkout</a>
+                <form action="checkout.php" method="get" class="checkout-form">
+                    <h2>Order Summary</h2>
+                    <div class="cart-summary-row">
+                        <span>Items</span>
+                        <span>₱<?php echo number_format($cartTotal, 2); ?></span>
+                    </div>
+                    <div class="cart-summary-row total">
+                        <span>Total</span>
+                        <span>₱<?php echo number_format($cartTotal, 2); ?></span>
+                    </div>
+
+                    <fieldset class="payment-options">
+                        <legend>Payment Method</legend>
+                        <label class="payment-option">
+                            <input type="radio" name="payment_method" value="cod" checked>
+                            <span class="payment-radio" aria-hidden="true"></span>
+                            <div class="payment-visual">
+                                <span class="payment-icon cod"><i class="fa-solid fa-truck-fast"></i></span>
+                                <div class="payment-copy">
+                                    <span class="payment-title">Cash on Delivery</span>
+                                    <span class="payment-note">Settle up when the rider arrives</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment_method" value="gcash">
+                            <span class="payment-radio" aria-hidden="true"></span>
+                            <div class="payment-visual">
+                                <span class="payment-icon wallet"><i class="fa-solid fa-wallet"></i></span>
+                                <div class="payment-copy">
+                                    <span class="payment-title">GCash</span>
+                                    <span class="payment-note">Pay instantly from your wallet</span>
+                                </div>
+                            </div>
+                        </label>
+                    </fieldset>
+
+                    <button type="submit" class="btn-checkout">Go to Checkout</button>
+                </form>
             </aside>
         </div>
     <?php endif; ?>

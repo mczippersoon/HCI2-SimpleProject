@@ -1,4 +1,36 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$cartMessage = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id'])) {
+    $id = (int)($_POST['product_id'] ?? 0);
+    $name = trim($_POST['product_name'] ?? '');
+    $price = (float)($_POST['product_price'] ?? 0);
+    $image = trim($_POST['product_image'] ?? '');
+    $quantity = max(1, (int)($_POST['quantity'] ?? 1));
+
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
+
+    if (isset($_SESSION['cart'][$id])) {
+        $_SESSION['cart'][$id]['quantity'] += $quantity;
+    } else {
+        $_SESSION['cart'][$id] = [
+            'id' => $id,
+            'name' => $name,
+            'price' => $price,
+            'image' => $image,
+            'quantity' => $quantity,
+        ];
+    }
+
+    $cartMessage = $name !== '' ? $name . ' added to cart.' : 'Item added to cart.';
+}
+
 include 'header.php';
 ?>
 
@@ -17,6 +49,13 @@ include 'header.php';
     <div class="products-header">
         <h1>Our Products</h1>
         <p>Browse our wide selection of high-quality products.</p>
+        <?php if ($cartMessage): ?>
+            <div class="cart-toast" role="status">
+                <i class="fa-solid fa-circle-check"></i>
+                <span><?php echo htmlspecialchars($cartMessage); ?></span>
+                <a href="cart.php" class="toast-link">View cart</a>
+            </div>
+        <?php endif; ?>
     </div>
 
     <div class="products-filters">
@@ -58,7 +97,7 @@ include 'header.php';
             <h3>Fresh Vegetables Box</h3>
             <p class="price">₱450.00</p>
             <p class="description">Farm-fresh seasonal vegetables delivered daily</p>
-            <form method="post" action="cart.php">
+            <form method="post" action="products.php">
                 <input type="hidden" name="product_id" value="1">
                 <input type="hidden" name="product_name" value="Fresh Vegetables Box">
                 <input type="hidden" name="product_price" value="450">
@@ -74,7 +113,7 @@ include 'header.php';
             <h3>Fresh Strawberries</h3>
             <p class="price">₱380.00</p>
             <p class="description">Sweet and juicy organic strawberries</p>
-            <form method="post" action="cart.php">
+            <form method="post" action="products.php">
                 <input type="hidden" name="product_id" value="2">
                 <input type="hidden" name="product_name" value="Fresh Strawberries">
                 <input type="hidden" name="product_price" value="380">
@@ -90,7 +129,7 @@ include 'header.php';
             <h3>Fresh Cucumber</h3>
             <p class="price">₱150.00</p>
             <p class="description">Crisp and refreshing organic cucumbers</p>
-            <form method="post" action="cart.php">
+            <form method="post" action="products.php">
                 <input type="hidden" name="product_id" value="3">
                 <input type="hidden" name="product_name" value="Fresh Cucumber">
                 <input type="hidden" name="product_price" value="150">
@@ -106,7 +145,7 @@ include 'header.php';
             <h3>Organic Potatoes</h3>
             <p class="price">₱200.00</p>
             <p class="description">Fresh farm potatoes perfect for any meal</p>
-            <form method="post" action="cart.php">
+            <form method="post" action="products.php">
                 <input type="hidden" name="product_id" value="4">
                 <input type="hidden" name="product_name" value="Organic Potatoes">
                 <input type="hidden" name="product_price" value="200">
@@ -122,7 +161,7 @@ include 'header.php';
             <h3>Dried Mango</h3>
             <p class="price">₱320.00</p>
             <p class="description">Sweet and chewy organic dried mango slices</p>
-            <form method="post" action="cart.php">
+            <form method="post" action="products.php">
                 <input type="hidden" name="product_id" value="5">
                 <input type="hidden" name="product_name" value="Dried Mango">
                 <input type="hidden" name="product_price" value="320">
@@ -138,7 +177,7 @@ include 'header.php';
             <h3>Guava Jam</h3>
             <p class="price">₱280.00</p>
             <p class="description">Homemade organic guava jam, no preservatives</p>
-            <form method="post" action="cart.php">
+            <form method="post" action="products.php">
                 <input type="hidden" name="product_id" value="6">
                 <input type="hidden" name="product_name" value="Guava Jam">
                 <input type="hidden" name="product_price" value="280">
@@ -154,7 +193,7 @@ include 'header.php';
             <h3>Kamote Chips</h3>
             <p class="price">₱250.00</p>
             <p class="description">Crispy baked sweet potato chips lightly salted</p>
-            <form method="post" action="cart.php">
+            <form method="post" action="products.php">
                 <input type="hidden" name="product_id" value="7">
                 <input type="hidden" name="product_name" value="Kamote Chips">
                 <input type="hidden" name="product_price" value="250">
@@ -170,7 +209,7 @@ include 'header.php';
             <h3>Fresh Mangoes</h3>
             <p class="price">₱300.00</p>
             <p class="description">Sweet ripe mangoes harvested at peak flavor</p>
-            <form method="post" action="cart.php">
+            <form method="post" action="products.php">
                 <input type="hidden" name="product_id" value="8">
                 <input type="hidden" name="product_name" value="Fresh Mangoes">
                 <input type="hidden" name="product_price" value="300">
@@ -186,7 +225,7 @@ include 'header.php';
             <h3>Strawberry Jam</h3>
             <p class="price">₱320.00</p>
             <p class="description">Small-batch strawberry jam made with ripe berries</p>
-            <form method="post" action="cart.php">
+            <form method="post" action="products.php">
                 <input type="hidden" name="product_id" value="9">
                 <input type="hidden" name="product_name" value="Strawberry Jam">
                 <input type="hidden" name="product_price" value="320">
@@ -200,6 +239,11 @@ include 'header.php';
 
 <script>
 (() => {
+    const toast = document.querySelector('.cart-toast');
+    if (toast) {
+        setTimeout(() => toast.classList.add('is-hidden'), 2000);
+    }
+
     const categorySelect = document.getElementById('filter-category');
     const priceSelect = document.getElementById('filter-price');
     const sortSelect = document.getElementById('sort-by');
